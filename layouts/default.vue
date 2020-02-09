@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <nuxt />
+  <div class="h-full">
+    <global-nav />
+    <div class="min-h-full h-full w-full flex">
+      <side-menu />
+      <nuxt />
+    </div>
   </div>
 </template>
 
@@ -15,6 +19,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+html,
+body,
+#__nuxt,
+#__layout {
+  height: 100%;
 }
 
 *,

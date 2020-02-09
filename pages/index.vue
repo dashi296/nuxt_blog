@@ -1,35 +1,24 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        blog
-      </h1>
-      <h2 class="subtitle">
-        My marvelous Nuxt Blog
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div class="flex">
+    <post-item
+      v-for="item in items"
+      :title="item.title"
+      :abstract="item.abstract"
+      :key="item.title"
+      class="w-1/3 h-10 shadow"
+    />
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
+  data() {
+    return {
+      items: [
+        { title: 'title1', abstract: 'testtesttest2' },
+        { title: 'title2', abstract: 'testtesttest2' }
+      ]
+    }
   }
 }
 </script>
