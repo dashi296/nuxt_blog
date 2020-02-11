@@ -1,14 +1,23 @@
 <template>
-  <article>
-    <h1>{{ post.fields.title }}</h1>
-    <div>{{ post.sys.createdAt | formatDate }}</div>
-    <div v-html="$md.render(post.fields.content)"></div>
-  </article>
+  <div class="mx-auto flex">
+    <actions :share-text="title" />
+    <div class="article max-w-screen-lg">
+      <h1>{{ post.fields.title }}</h1>
+      <time class="text-gray">{{ post.sys.createdAt | formatDate }}</time>
+      <div v-html="$md.render(post.fields.content)" />
+    </div>
+  </div>
 </template>
 
 <script>
 import client from '~/plugins/contentful'
 export default {
+  layout: 'post',
+  computed: {
+    title() {
+      return this.post.fields.title
+    }
+  },
   asyncData({ params, error, payload }) {
     if (payload) return { post: payload }
     return client
@@ -23,7 +32,7 @@ export default {
   },
   head() {
     return {
-      title: this.post.fields.title
+      title: this.title
     }
   }
 }

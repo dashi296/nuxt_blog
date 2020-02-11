@@ -1,24 +1,38 @@
 <template>
-  <div
-    class="flex flex-col w-full sm:w-1/2 md:w-1/3 lg:w-1/4 m-2 rounded shadow"
-  >
+  <div class="post rounded shadow">
     <img src="/dummy.png" alt="dummy" />
-    <div class="text-xl">{{ title }}</div>
-    <div>{{ content }}</div>
+    <div class="text-2xl font-bold p-2">{{ title }}</div>
+    <div>{{ content | Abstracted }}</div>
+    <time class="text-gray text-right">
+      {{ createdAt | formatRelativeTime }}
+    </time>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    title: {
-      type: String,
+    post: {
+      type: Object,
       required: true
+    }
+  },
+  computed: {
+    title() {
+      return this.post.fields.title
     },
-    content: {
-      type: String,
-      required: true
+    content() {
+      return this.post.fields.content
+    },
+    createdAt() {
+      return this.post.sys.createdAt
     }
   }
 }
 </script>
+
+<style scoped>
+.post {
+  max-width: 300px;
+}
+</style>

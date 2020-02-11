@@ -1,6 +1,9 @@
 /* eslint-disable nuxt/no-cjs-in-config */
 // eslint-disable-next-line nuxt/no-cjs-in-config
-require('dotenv').config() // 一番上に
+
+const baseDir = process.env.BASE_DIR || '/'
+const baseUrl = process.env.BASE_URL || 'http://localhost:3000'
+require('dotenv').config()
 const client = require('./plugins/contentful')
 
 export default {
@@ -35,7 +38,8 @@ export default {
   plugins: [
     '~/plugins/common-components.js',
     '~/plugins/contentful',
-    '~/plugins/date-format.js'
+    '~/plugins/date-format.js',
+    '~/plugins/filters.js'
   ],
   markdownit: {
     injected: true,
@@ -56,8 +60,12 @@ export default {
     }
   },
   env: {
+    baseUrl,
     CTF_SPACE_ID: process.env.CTF_SPACE_ID,
     CTF_ACCESS_TOKEN: process.env.CTF_ACCESS_TOKEN
+  },
+  router: {
+    base: baseDir
   },
   /*
    ** Nuxt.js dev-modules
@@ -79,8 +87,19 @@ export default {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     '@nuxtjs/markdownit',
-    '@nuxtjs/moment'
+    '@nuxtjs/moment',
+    'nuxt-fontawesome'
   ],
+
+  fontawesome: {
+    component: 'fa',
+    imports: [
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['faTwitter', 'faFacebook']
+      }
+    ]
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
