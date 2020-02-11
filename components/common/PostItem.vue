@@ -1,8 +1,10 @@
 <template>
-  <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 m-2 shadow">
+  <div
+    class="flex flex-col w-full sm:w-1/2 md:w-1/3 lg:w-1/4 m-2 rounded shadow"
+  >
     <img src="/dummy.png" alt="dummy" />
     <div class="text-xl">{{ title }}</div>
-    <div>{{ abstract }}</div>
+    <div>{{ content }}</div>
   </div>
 </template>
 
@@ -13,7 +15,7 @@ export default {
       type: String,
       required: true
     },
-    abstract: {
+    content: {
       type: String,
       required: true
     }

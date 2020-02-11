@@ -12,12 +12,16 @@ module.exports = {
     'prettier',
     'prettier/vue',
     'plugin:prettier/recommended',
-    'plugin:nuxt/recommended'
+    'plugin:nuxt/recommended',
+    'standard'
   ],
   plugins: [
+    'vue',
     'prettier'
   ],
   // add your custom rules here
   rules: {
+    "no-console": "off",
+    "space-before-function-paren": ["error", "never"],
   }
 }

@@ -1,3 +1,8 @@
+/* eslint-disable nuxt/no-cjs-in-config */
+// eslint-disable-next-line nuxt/no-cjs-in-config
+require('dotenv').config() // 一番上に
+const client = require('./plugins/contentful')
+
 export default {
   mode: 'universal',
   /*
@@ -23,11 +28,37 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/css/main.css'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/common-components.js'],
+  plugins: [
+    '~/plugins/common-components.js',
+    '~/plugins/contentful',
+    '~/plugins/date-format.js'
+  ],
+  markdownit: {
+    injected: true,
+    html: true,
+    linkify: true,
+    typography: true
+  },
+  generate: {
+    routes() {
+      return client.getEntries({ content_type: 'post' }).then((entries) => {
+        return entries.items.map((entry) => {
+          return {
+            route: '/posts/' + entry.fields.slug,
+            payload: entry
+          }
+        })
+      })
+    }
+  },
+  env: {
+    CTF_SPACE_ID: process.env.CTF_SPACE_ID,
+    CTF_ACCESS_TOKEN: process.env.CTF_ACCESS_TOKEN
+  },
   /*
    ** Nuxt.js dev-modules
    */
@@ -46,7 +77,9 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/markdownit',
+    '@nuxtjs/moment'
   ],
   /*
    ** Axios module configuration
