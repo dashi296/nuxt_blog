@@ -1,9 +1,8 @@
 <template>
-  <div class="flex p-8">
-    <template v-for="post in posts">
-      <nuxt-link :to="`/posts/${post.fields.slug}`" :key="post.fields.slug">
-        <post-item :post="post" />
-      </nuxt-link>
+  <div class="flex justify-between flex-wrap py-12 w-full">
+    <template v-for="(post, i) in posts">
+      <divider v-if="i > 0" :key="`d${post.fields.slug}`" />
+      <post-item :post="post" :key="post.fields.slug" />
     </template>
   </div>
 </template>
@@ -13,7 +12,11 @@ import client from '~/plugins/contentful'
 export default {
   asyncData({ params }) {
     return client
-      .getEntries({ content_type: 'post', order: '-sys.createdAt' })
+      .getEntries({
+        content_type: 'post',
+        select: 'fields.title,fields.content,fields.slug,sys.createdAt',
+        order: '-sys.createdAt'
+      })
       .then((entries) => {
         return { posts: entries.items }
       })

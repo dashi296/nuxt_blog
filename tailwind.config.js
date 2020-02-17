@@ -9,12 +9,14 @@ module.exports = {
     colors: {
       primary: '#07889B',
       secondary: '#E37222',
-      base: '#66B9BF',
       accent: '#EEAA7B',
       gray: '#999',
+      lightgray: '#DDD',
       facebook: '#3B5998',
       twitter: '#1DA1F2',
-      white: '#FFFFFF'
+      github: '#171515',
+      white: '#FFFFFF',
+      black: '#000000'
     },
     inset: {
       '0': 0,

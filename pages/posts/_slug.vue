@@ -1,7 +1,7 @@
 <template>
-  <div class="mx-auto flex">
+  <div class="mx-auto flex justify-center">
     <actions :share-text="title" />
-    <div class="article max-w-screen-lg">
+    <div class="article max-w-screen-md py-12">
       <h1>{{ post.fields.title }}</h1>
       <time class="text-gray">{{ post.sys.createdAt | formatDate }}</time>
       <div v-html="$md.render(post.fields.content)" />
@@ -12,7 +12,6 @@
 <script>
 import client from '~/plugins/contentful'
 export default {
-  layout: 'post',
   computed: {
     title() {
       return this.post.fields.title

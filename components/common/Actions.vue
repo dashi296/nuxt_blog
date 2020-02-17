@@ -1,19 +1,16 @@
 <template>
   <div class="actions p-8 hidden sm:flex flex-col sticky top-1/5">
-    <a :href="twitterTo" target="_blank" rel="noopener noreferrer">
-      <fa
-        :icon="['fab', 'twitter']"
-        class="rounded-full bg-twitter text-white fa-4x p-4 mb-4"
-      />
-    </a>
-    <a :href="facebookTo" target="_blank" rel="noopener noreferrer">
-      <fa :icon="['fab', 'facebook']" class="text-facebook fa-4x" />
-    </a>
+    <sns-share-icon :to="twitterTo" icon="twitter" class="mb-4" />
+    <sns-share-icon :to="facebookTo" icon="facebook" reversed />
   </div>
 </template>
 
 <script>
+import SnsShareIcon from '@/components/common/SnsShareIcon'
 export default {
+  components: {
+    SnsShareIcon
+  },
   props: {
     shareText: {
       type: String,
