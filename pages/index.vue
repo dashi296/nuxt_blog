@@ -8,19 +8,14 @@
 </template>
 
 <script>
-import client from '~/plugins/contentful'
 export default {
-  asyncData({ params }) {
-    return client
-      .getEntries({
-        content_type: 'post',
-        select: 'fields.title,fields.content,fields.slug,sys.createdAt',
-        order: '-sys.createdAt'
-      })
-      .then((entries) => {
-        return { posts: entries.items }
-      })
-      .catch((e) => console.log(e))
+  computed: {
+    posts() {
+      return this.$store.state.posts
+    }
+  },
+  async fetch({ store, params }) {
+    await store.dispatch('FETCH_POSTS')
   }
 }
 </script>
