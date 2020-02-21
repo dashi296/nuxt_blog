@@ -1,0 +1,12 @@
+version: '2.3'
+services:
+  node-app:
+    extends:
+      file: common.yml
+      service: node-app
+    tty: true
+    ports:
+      - '3003:3000'
+    command: /bin/sh
+    volumes:
+      - ./:/var/www/app

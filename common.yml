@@ -1,0 +1,8 @@
+version: '2.3'
+services:
+  node-app:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    image: semantic
+    working_dir: /var/www/app
