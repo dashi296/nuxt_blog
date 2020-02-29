@@ -31,10 +31,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-    '@/assets/css/main.css',
-    '@fortawesome/fontawesome-svg-core/styles.css'
-  ],
+  css: ['@/assets/css/main.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -79,7 +76,8 @@ export default {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    'nuxt-fontawesome'
   ],
   /*
    ** Nuxt.js modules
@@ -90,8 +88,7 @@ export default {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     '@nuxtjs/markdownit',
-    '@nuxtjs/moment',
-    'nuxt-fontawesome'
+    '@nuxtjs/moment'
   ],
 
   fontawesome: {
@@ -107,6 +104,16 @@ export default {
       }
     ]
   },
+
+  purgeCSS: {
+    whitelistPatterns: [
+      /(^|\.)fa-/,
+      /-fa($|\.)/,
+      /-twitter($|\.)/,
+      /-github($|\.)/,
+      /-facebook($|\.)/
+    ]
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -119,6 +126,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, { isDev, isClient }) {}
   }
 }
