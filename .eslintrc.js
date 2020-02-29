@@ -28,7 +28,15 @@ module.exports = {
     "arrow-parens": ["error", "always"],
     "no-console": "off",
     "space-before-function-paren": ["error", "never"],
-
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "always",
+        "normal": "always",
+        "component": "always"
+      },
+      "svg": "always",
+      "math": "always"
+    }],
 
     camelcase: 'off',
     '@typescript-eslint/camelcase': ['error', { properties: 'never' }],
