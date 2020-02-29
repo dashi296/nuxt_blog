@@ -8,8 +8,10 @@
   </a>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
   props: {
     to: {
       type: String,
@@ -30,5 +32,5 @@ export default {
       return `text-white bg-${this.icon} p-2`
     }
   }
-}
+})
 </script>

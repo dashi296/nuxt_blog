@@ -11,7 +11,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async FETCH_POSTS({ state, commit }) {
+  async FETCH_POSTS({ commit }) {
     await client
       .getEntries({
         content_type: 'post',

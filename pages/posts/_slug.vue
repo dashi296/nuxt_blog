@@ -12,12 +12,7 @@
 <script>
 import client from '~/plugins/contentful'
 export default {
-  computed: {
-    title() {
-      return this.post.fields.title
-    }
-  },
-  asyncData({ params, error, payload }) {
+  asyncData({ params, /* error, */ payload }) {
     if (payload) return { post: payload }
     return client
       .getEntries({
@@ -28,6 +23,11 @@ export default {
         return { post: entries.items[0] }
       })
       .catch((e) => console.log(e))
+  },
+  computed: {
+    title() {
+      return this.post.fields.title
+    }
   },
   head() {
     return {

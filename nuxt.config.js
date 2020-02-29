@@ -71,6 +71,8 @@ export default {
    ** Nuxt.js dev-modules
    */
   buildModules: [
+    '@nuxt/typescript-build',
+
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/stylelint-module
@@ -114,6 +116,11 @@ export default {
       /-facebook($|\.)/
     ]
   },
+  typescript: {
+    typeCheck: {
+      eslint: true
+    }
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -126,6 +133,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     extend(config, { isDev, isClient }) {}
   }
 }

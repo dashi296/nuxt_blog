@@ -10,22 +10,33 @@
       <div class="flex justify-center">
         <nav-link
           v-for="item in navlinkItems"
+          :key="item.label"
           :label="item.label"
           :to="item.to"
-          :key="item.label"
         />
       </div>
     </div>
   </header>
 </template>
 
-<script>
-import NavLink from '@/components/common/NavLink'
-export default {
+<script lang="ts">
+import Vue from 'vue'
+import NavLink from '@/components/common/NavLink.vue'
+
+interface NavLinkItem {
+  label: string
+  to: string
+}
+
+type dataType = {
+  navlinkItems: NavLinkItem[]
+}
+
+export default Vue.extend({
   components: {
     NavLink
   },
-  data() {
+  data(): dataType {
     return {
       navlinkItems: [
         { label: 'About', to: '/about' },
@@ -33,5 +44,5 @@ export default {
       ]
     }
   }
-}
+})
 </script>
