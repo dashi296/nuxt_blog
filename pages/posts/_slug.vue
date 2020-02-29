@@ -2,37 +2,41 @@
   <div class="mx-auto flex justify-center">
     <actions :share-text="title" />
     <div class="article max-w-screen-md py-12">
-      <h1>{{ post.fields.title }}</h1>
-      <time class="text-gray">{{ post.sys.createdAt | formatDate }}</time>
-      <div v-html="$md.render(post.fields.content)" />
+      <h1>{{ title }}</h1>
+      <time class="text-gray">{{ createdAt | formatDate }}</time>
+      <div v-html="$md.render(content)" />
     </div>
   </div>
 </template>
 
-<script>
-import client from '~/plugins/contentful'
-export default {
-  asyncData({ params, /* error, */ payload }) {
-    if (payload) return { post: payload }
-    return client
-      .getEntries({
-        content_type: 'post',
-        'fields.slug': params.slug
-      })
-      .then((entries) => {
-        return { post: entries.items[0] }
-      })
-      .catch((e) => console.log(e))
-  },
+<script lang="ts">
+import Vue from 'vue'
+import { mapGetters } from 'vuex'
+import { Post } from '@/models/Post'
+type asyncDataType = {
+  post: Post
+}
+
+export default Vue.extend({
   computed: {
-    title() {
+    ...mapGetters(['post']),
+    title(): string {
       return this.post.fields.title
+    },
+    content(): string {
+      return this.post.fields.content
+    },
+    createdAt(): string {
+      return this.post.sys.createdAt
     }
   },
-  head() {
+  async fetch({ store, params }) {
+    await store.dispatch('FETCH_POST', { slug: params.slug })
+  },
+  head(): { title: string } {
     return {
       title: this.title
     }
   }
-}
+})
 </script>

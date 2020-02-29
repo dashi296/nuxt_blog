@@ -4,7 +4,9 @@
     class="inline-block p-4 w-full hover:text-primary"
   >
     <div class="post rounded">
-      <div class="text-xl font-bold tracking-wider pb-1">{{ title }}</div>
+      <div class="text-xl font-bold tracking-wider pb-1">
+        {{ title }}
+      </div>
       <div class="text-sm tracking-wide leading-5 text-black">
         {{ content | Abstracted }}
       </div>
@@ -16,24 +18,27 @@
   </nuxt-link>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { PropType } from 'vue'
+import { Post } from '@/models/Post'
+
+export default Vue.extend({
   props: {
     post: {
-      type: Object,
+      type: Object as PropType<Post>,
       required: true
     }
   },
   computed: {
-    title() {
+    title(): string {
       return this.post.fields.title
     },
-    content() {
+    content(): string {
       return this.post.fields.content
     },
-    createdAt() {
+    createdAt(): string {
       return this.post.sys.createdAt
     }
   }
-}
+})
 </script>

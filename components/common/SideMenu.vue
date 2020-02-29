@@ -4,7 +4,7 @@
 
     <div>dashi296</div>
     <div>Webエンジニア</div>
-    <div></div>
+    <div />
 
     <div class="flex justify-around">
       <a href="https://twitter.com/dashi296">
@@ -23,9 +23,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
+<script lang="ts">
+import Vue from 'vue'
+
+interface ProfileItem {
+  label: string
+  value: string
+}
+
+type dataType = {
+  profileItems: ProfileItem[]
+}
+
+export default Vue.extend({
+  data(): dataType {
     return {
       profileItems: [
         { label: 'Name', value: 'dashi' },
@@ -33,5 +44,5 @@ export default {
       ]
     }
   }
-}
+})
 </script>

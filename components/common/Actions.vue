@@ -5,9 +5,11 @@
   </div>
 </template>
 
-<script>
-import SnsShareIcon from '@/components/common/SnsShareIcon'
-export default {
+<script lang="ts">
+import Vue from 'vue'
+import SnsShareIcon from '@/components/common/SnsShareIcon.vue'
+
+export default Vue.extend({
   components: {
     SnsShareIcon
   },
@@ -18,17 +20,18 @@ export default {
     }
   },
   computed: {
-    absolutePath() {
-      return `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}`
+    absolutePath(): string {
+      // history要らないのでは？ return `${process.env.baseUrl}${this.$router.history.base}${this.$route.path}`
+      return `${process.env.baseUrl}${this.$route.path}`
     },
-    twitterTo() {
+    twitterTo(): string {
       return `https://twitter.com/intent/tweet?text=${this.shareText}&url=${this.absolutePath}`
     },
-    facebookTo() {
+    facebookTo(): string {
       return `https://www.facebook.com/sharer/sharer.php?u=${this.absolutePath}`
     }
   }
-}
+})
 </script>
 
 <style scoped>

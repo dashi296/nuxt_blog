@@ -7,15 +7,18 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+import { Post } from '@/models/Post'
+
+export default Vue.extend({
   async fetch({ store }) {
     await store.dispatch('FETCH_POSTS')
   },
   computed: {
-    posts() {
+    posts(): Post[] {
       return this.$store.state.posts
     }
   }
-}
+})
 </script>
